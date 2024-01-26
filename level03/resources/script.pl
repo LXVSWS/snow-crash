@@ -14,5 +14,6 @@ print $cmd;
 #strace ./$file # system calls & signals
 #ltrace ./$file # library calls tracer
 #readelf -a $file # ELF informations
-#xxd $file # binary to hex dump
-#xxd -r $file # reverse hex to binary
+#xxd $file # binary to hex dump (all infos)
+#xxd -p $file # binary to raw hex dump
+#xxd -r -p $file # reverse raw hex to binary
