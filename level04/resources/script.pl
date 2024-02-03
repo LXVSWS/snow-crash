@@ -1,15 +1,15 @@
 #!/usr/bin/perl
 
 $ip = @ARGV ? $ARGV[0] : "192.168.56.2";
+$user = "level04";
 
 $red = "\e[31m";
 $green = "\e[32m";
 $reset = "\e[0m";
 
-$file = "level04.pl";
-$cmd = "scp -q -P 4242 level04\@$ip:~/$file .";
-system($cmd);
-print $red, $cmd, "\n", $reset;
+$scp = "scp -q -P 4242 $user\@$ip:~/level04.pl .";
+print $red, $scp, $reset, "\n";
+system($scp);
 
 #file $file # basic informations
 #ldd $file # dynamic libraries
