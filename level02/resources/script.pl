@@ -2,7 +2,12 @@
 
 $ip = @ARGV ? $ARGV[0] : "192.168.56.2";
 $file = "level02.pcap";
-$cmd = "scp -q -P 4242 level02\@$ip:~/$file . && chmod 777 $file\n";
+
+$red = "\e[31m";
+$green = "\e[32m";
+$reset = "\e[0m";
+
+$cmd = "scp -q -P 4242 level02\@$ip:~/$file .";
 system($cmd);
-print $cmd, "ft_wandrNDRelL0L\n";
+print $red, $cmd, $green, "\nft_wandrNDRelL0L\n", $reset;
 system("ssh -qp 4242 flag02\@$ip 'getflag'");
