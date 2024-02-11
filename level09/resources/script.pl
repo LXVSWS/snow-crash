@@ -14,7 +14,8 @@ system($cmd);
 $tool = "gcc caesarv2.c && ./a.out ";
 print $tool;
 $input = <STDIN>;
-$cmd2 = $tool.$input;
+chomp($input);
+$cmd2 = $tool.$input." && rm a.out\n";
 system($cmd2);
 
 $flag = "ssh -qp 4242 flag09\@$ip 'getflag'";
