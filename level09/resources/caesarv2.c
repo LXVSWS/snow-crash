@@ -1,20 +1,24 @@
-#include <fcntl.h>
-#include <unistd.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
 int main(int argc, char **argv) {
 	if (argc == 2) {
-		int fd;
-		int bytes_read;
-		char buffer[25];
-		fd = open(argv[1], O_RDONLY);
-		bytes_read = read(fd, buffer, 25);
-		for (int i = 0 ; i < 25 ; ++i) {
-			char c = buffer[i] - i;
-			write(1, &c, 1);
+		char *hex = argv[1];
+		int len = strlen(hex);
+		unsigned int count = 0;
+
+		for (unsigned int i = 0 ; i < len ; i += 2) {
+			char pair[3];
+			pair[0] = hex[i];
+			pair[1] = hex[i + 1];
+			pair[2] = '\0';
+			unsigned int value = strtol(pair, NULL, 16);
+			char c = value - count;
+			++count;
+			printf("%c", c);
 		}
-		char nl = '\n';
-		write(1, &nl, 1);
-		close(fd);
+		printf("\n");
 	}
 	return 0;
 }

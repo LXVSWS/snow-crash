@@ -7,6 +7,16 @@ $red = "\e[31m";
 $green = "\e[32m";
 $reset = "\e[0m";
 
-$scp = "scp -q -P 4242 $user\@$ip:~/level09 .";
-print $red, $scp, $reset, "\n";
-system($scp);
+$cmd = "ssh -qp 4242 $user\@$ip 'cat token && cat token | xxd -p'";
+print $green, $cmd, $reset, "\n";
+system($cmd);
+
+$tool = "gcc caesarv2.c && ./a.out ";
+print $tool;
+$input = <STDIN>;
+$cmd2 = $tool.$input;
+system($cmd2);
+
+$flag = "ssh -qp 4242 flag09\@$ip 'getflag'";
+print $red, $flag, $reset, "\n";
+system($flag);
