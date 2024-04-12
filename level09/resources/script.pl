@@ -7,8 +7,9 @@ $green = "\e[32m";
 $reset = "\e[0m";
 $user = "level09";
 
-$cmd = "ssh -qp $port $user\@$ip 'cat token && cat token | xxd -p'";
-print $green, $cmd, $reset, "\n";
+$exploit = "cat token && cat token | xxd -p";
+$cmd = "ssh -qp $port $user\@$ip '$exploit'";
+print $red, $exploit, $reset, "\n";
 system($cmd);
 
 $tool = "gcc caesarv2.c && ./a.out ";
@@ -16,8 +17,6 @@ print $tool;
 $input = <STDIN>;
 chomp($input);
 $cmd2 = $tool.$input." && rm a.out\n";
-system($cmd2);
+print $green, `$cmd2`, $reset;
 
-$flag = "ssh -qp $port flag09\@$ip 'getflag'";
-print $red, $flag, $reset, "\n";
-system($flag);
+system("ssh -qp $port flag09\@$ip 'getflag'");

@@ -7,14 +7,15 @@ $green = "\e[32m";
 $reset = "\e[0m";
 $user = "level06";
 
-$chmod = "ssh -qp $port $user\@$ip 'chmod 777 . && rm injection'";
-print $green, $chmod, $reset, "\n";
-system($chmod);
+$chmod = "chmod 777 .";
+$ssh = "ssh -qp $port $user\@$ip '$chmod && rm -rf injection'";
+print $red, $chmod, $reset, "\n";
+system($ssh);
 
-$scp2 = "scp -q -P $port ./injection $user\@$ip:~";
-print $red, $scp2, $reset, "\n";
-system($scp2);
+$scp = "scp -q -P $port ./injection $user\@$ip:~";
+print $green, $scp, $reset, "\n";
+system($scp);
 
 $tool = "./$user injection";
-print $green, $tool, $reset, "\n";
+print $red, $tool, $reset, "\n";
 system("ssh -qp $port $user\@$ip '$tool'");
